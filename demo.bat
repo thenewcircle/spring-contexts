@@ -17,4 +17,4 @@ EXIT /B
   set APP_CLASS=app.DIMessageEmitter
   GOTO END_CASE
 :END_CASE
-	mvn clean compile exec:java -Dexec.mainClass=%APP_CLASS% 
+	mvn clean compile exec:java -Dexec.mainClass=%APP_CLASS%  -Dexec.cleanupDaemonThreads=false

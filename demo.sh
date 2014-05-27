@@ -12,4 +12,4 @@ case $1 in
 		;;
 esac
 
-mvn clean compile exec:java -Dexec.mainClass=${APP_CLASS}
+mvn clean compile exec:java -Dexec.mainClass=${APP_CLASS} -Dexec.cleanupDaemonThreads=false
