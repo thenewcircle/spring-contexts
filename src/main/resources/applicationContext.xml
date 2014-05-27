@@ -5,5 +5,55 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
+	<bean id="emitter" class="services.PrintStreamEmitter" scope="prototype" />
+
+	<bean id="tim" class="domain.Person">
+		<property name="name" value="Tim" />
+	</bean>
+
+	<bean id="alice" class="domain.Person">
+		<property name="name" value="Alice" />
+	</bean>
+
+	<bean id="bob" class="domain.Person">
+		<property name="name" value="Bob" />
+	</bean>
+
+	<bean id="debbie" class="domain.Person">
+		<property name="name" value="Debbie" />
+	</bean>
+
+	<bean id="messageBody" class="java.lang.String">
+		<constructor-arg value="Have a nice day!" />
+	</bean>
+
+	<bean id="message" class="domain.Message">
+		<property name="receiver" ref="alice" />
+		<property name="sender" ref="tim" />
+		<property name="body" ref="messageBody" />
+	</bean>
+
+	<bean id="messages" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="message" />
+				<bean class="domain.Message">
+					<property name="receiver" ref="debbie" />
+					<property name="sender" ref="alice" />
+					<property name="body" ref="messageBody" />
+				</bean>
+				<bean class="domain.Message">
+					<property name="receiver" ref="bob" />
+					<property name="sender" ref="debbie" />
+					<property name="body" ref="messageBody" />
+				</bean>
+
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="messageEmitter" class="app.MessageEmitter"
+		p:emitter-ref="emitter" p:messages-ref="messages" />
+
 
 </beans>
